@@ -1,0 +1,31 @@
+
+
+
+
+{% extends 'main.html' %}
+{%block content%}
+
+<section class="devlist">
+  <div class="container" style="margin-bottom: 16px;">
+    <img class="singleProject__preview" style="max-width: 75%; height: 60%;" src="{{announcement.announce_image.url}}" alt="portfolio thumbnail" />
+          <h2 class="singleProject__title" >{{announcement.title}}</h2>
+          <div class="settings">
+          <a href="{% url 'user-profile' announcement.owner.id %}" class="singleProject__developer" style="margin-bottom: 12px;"> By {{announcement.owner}}</a>
+          <p>Posted on: {{announcement.created}}</p>
+        </div>
+          <h3 class="singleProject__subtitle">About the Announcement</h3>
+          <h5 style="margin: 6px 0px;"><span style="color: red;">Event Date : </span>{{announcement.event_date}}{{announcement.event_time}}</h5>
+
+          <h4>Description : </h4>
+          <div class="singleProject__info">
+            {{announcement.description|linebreaksbr}}
+          </div>
+          {% if announcement.featured_link %}
+          <a style="margin-top: 10px;" class="singleProject__liveLink" href="{{announcement.fratured_link}}" target="_blank"><i class="im im-external-link"></i>refer this link for more info
+          </a>
+          {%endif%}
+    </div>
+</section>
+
+
+{% endblock %}

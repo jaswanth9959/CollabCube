@@ -1,0 +1,1 @@
+web: gunicorn collabcube.wsgi --log-file -

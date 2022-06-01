@@ -1,0 +1,37 @@
+{%extends 'main.html' %}
+
+{% block content %}
+<main class="formPage my-xl">
+    <div class="content-box">
+        <div class="settings">
+            <h3 class="settings__title"><a class="backButton" href="{% url 'announcements' %}"><i class="im im-angle-left"></i></a></h3>
+            
+            <!-- <a class="tag tag--pill tag--sub settings__btn tag--lg" href="{% url 'create-announcement' %}"><i class="im im-plus"></i> Add Announcement</a> -->
+        </div>
+        <div class="settings">
+            <h3 class="settings__title"> My Announcements</h3>
+        </div>
+        <table class="settings__table">
+            {% for announce in announcements %}
+        <tr>
+            <td class="settings__thumbnail">
+            <a href="{% url 'announcement' announce.id%}"><img src="{{announce.announce_image.url }}" alt="Project Thumbnail" /></a>
+            </td>
+            <td class="settings__tableInfo">
+            <a href="{% url 'announcement' announce.id%}">{{announce.title}}</a>
+            <p>
+                {{announce.description|slice:"150"}}
+            </p>
+            </td>
+            <td class="settings__tableActions">
+            <a class="tag tag--pill tag--main settings__btn" href="{%url 'update-announcement' announce.id %}"><i class="im im-edit"></i> Edit</a>
+            <a class="tag tag--pill tag--main settings__btn" href="{%url 'delete-announcement' announce.id %}"><i class="im im-x-mark-circle-o"></i>
+                Delete</a>
+            </td>
+        </tr>
+        {%endfor%}
+        </table>
+    </div>
+</main>
+
+{%endblock%}

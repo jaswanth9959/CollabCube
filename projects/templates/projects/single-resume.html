@@ -1,0 +1,475 @@
+{%load static%}
+<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!--========== BOX ICONS ==========-->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+
+        <!--========== CSS ==========-->
+        <link rel="stylesheet" href="{% static 'styles/style.css'%}">
+
+        <title>Resume Builder</title>
+    </head>
+    <body>
+        <div style="margin: auto;width: 20%;">
+        <a href="{% url 'update-resume' resume.id %}" style="display: inline-block;
+        border: 2px solid rgb(59, 55, 55);
+        color: #F2F2F2;
+        background-color: #1b1b1b;
+        padding: 1rem 2rem;
+        border-radius: .25rem;
+        transition: .3s;
+        font-weight: 500;
+        margin: 1rem;" >Edit</a>
+
+        <a href="{% url 'profiles' %}" style="display: inline-block;
+        border: 2px solid rgb(59, 55, 55);
+        color: #F2F2F2;
+        background-color: #1b1b1b;
+        padding: 1rem 2rem;
+        border-radius: .25rem;
+        transition: .3s;
+        font-weight: 500;
+        margin: 1rem;" >Quit</a>
+        </div> 
+        
+        <!--========== HEADER ==========-->
+        <!-- <header class="l-header" id="header">
+            <nav class="nav bd-container">
+                <div class="nav__menu" id="nav-menu">
+                   <ul class="nav__list">
+                       <li class="nav__item">
+                           <a href="#" class="nav__link active-link">
+                               <i class = 'bx bx-home nav__icon'></i>Home
+                           </a>
+                       </li>
+
+                       <li class="nav__item">
+                        <a href="#profile" class="nav__link">
+                            <i class = 'bx bx-user nav__icon'></i>Profile
+                        </a>
+                    </li>
+
+                    <li class="nav__item">
+                        <a href="#education" class="nav__link">
+                            <i class = 'bx bx-book nav__icon'></i>Education
+                        </a>
+                    </li>
+
+                    <li class="nav__item">
+                        <a href="#skills" class="nav__link">
+                            <i class = 'bx bx-receipt nav__icon'></i>Skills
+                        </a>
+                    </li>
+
+                    <li class="nav__item">
+                        <a href="#experience" class="nav__link">
+                            <i class = 'bx bx-briefcase-alt nav__icon'></i>Experience
+                        </a>
+                    </li>
+
+                    <li class="nav__item">
+                        <a href="#projects" class="nav__link">
+                            <i class = 'bx bx-link-external nav__icon'></i>Projects
+                        </a>
+                    </li>
+
+                    <li class="nav__item">
+                        <a href="#certificates" class="nav__link">
+                            <i class = 'bx bx-award nav__icon'></i>Certificates
+                        </a>
+                    </li>
+
+                    
+                   </ul>
+                </div>
+
+                <div class="nav__toggle" id="nav-toggle">
+                    <i class = 'bx bx-grid-alt'></i>
+                </div>
+            </nav>
+        </header> -->
+
+        <main class="l-main bd-container">
+            <!-- All elements within this div, is generated in PDF -->
+            <div class="resume" id="area-cv">
+                <div class="resume__left">
+                    <!--========== HOME ==========-->
+                    <section class="home" id="home">
+                        <div class="home__container section bd-grid">
+                            <div class="home__data bd-grid">
+                                <!-- <img src="{{resume.profile_image.url}}" alt="" class="home__img"> -->
+                                <p class="home__img"></p>
+                                <h1 class="home__title">{{resume.name}}</h1>
+                                <!-- <h3 class="home__profession">{{resume.name}}</h3> -->
+
+                            
+                                <div>
+                                    <p class="profile__description home__button-movil"> To download your resume please go to desktop version of application</p>
+                                    <!-- <a download="" href="assets/pdf/ResumeCv.pdf" class="home__button-movil">Download</a> -->
+                                </div>
+                            </div>
+
+                            <div class="home__address bd-grid">
+                                <span class="home__information">
+                                    <i class='bx bx-map home__icon'></i> {{resume.location}}
+                                </span>
+
+                                <span class="home__information">
+                                    <i class='bx bx-envelope home__icon'></i> {{resume.mail}}
+                                </span>
+
+                                <span class="home__information">
+                                    <i class='bx bx-phone home__icon'></i> {{resume.mobile}}
+                                </span>
+                            </div>
+                        </div>
+                        <!-- Theme change button -->
+                        <i class='bx bx-moon change-theme' title="Theme" id="theme-button"></i>
+
+                        <!-- Button to generate and download the pdf. Available for desktop. -->
+                        <i class='bx bx-download generate-pdf' title="Generate PDF" id="resume-button"></i>
+    
+                    </section>          
+                    
+                    <!--========== SOCIAL ==========-->
+                    <section class="social section">
+                        <h2 class="section-title">SOCIAL</h2>
+
+                        <div class="social__container bd-grid">
+                            <a href="{{resume.social_linkedin}}" target="_blank" class="social__link">
+                                <i class='bx bxl-linkedin-square social__icon'></i> @{{resume.name}}
+                            </a>
+
+                            <a href="{{resume.social_github}}" target="_blank" class="social__link">
+                                <i class='bx bxl-github social__icon'></i>@{{resume.name}}
+                            </a>
+
+                            <a href="{{resume.social_website}}" target="_blank" class="social__link">
+                                <i class='bx bx-globe social__icon' ></i> @{{resume.name}}
+                            </a>
+
+                            
+                        </div>
+                        
+                    </section>
+
+                    <!--========== PROFILE ==========-->
+                    <section class="profile section" id="profile">
+                        <h2 class="section-title">Profile</h2>
+
+                        <p class="profile__description">{{resume.short_intro}}</p>
+                    </section>
+                    
+                    <!--========== EDUCATION ==========-->
+                    <section class="education section" id="education">
+                        <h2 class="section-title">Education</h2>
+
+                        <div class="education__container bd-grid">
+                            <div class="education__content">
+                                <div class="education__time">
+                                    <span class="education__rounder"></span>
+                                    <span class="education__line"></span>
+                                </div>
+
+                                <div class="education__data bd-grid">
+                                    <h3 class="eeducation__title">{{resume.college_name}}</h3>
+                                    <span class="education__studies">{{resume.course_and_branch}}</span>
+                                    <span class="education__year">{{resume.college_year}}</span>
+                                    <span class="education__year">{{resume.college_percentage}}% aggregate</span>
+                                </div>
+                            </div>
+
+                            <div class="education__content">
+                                <div class="education__time">
+                                    <span class="education__rounder"></span>
+                                    <span class="education__line"></span>
+                                </div>
+
+                                <div class="education__data bd-grid">
+                                    <h3 class="eeducation__title">{{resume.intercollege_name}}</h3>
+                                    <span class="education__studies">{{resume.inter_course}}</span>
+                                    <span class="education__year">{{resume.inter_year}}</span>
+                                    <span class="education__year">{{resume.inter_percentage}}% aggregate</span>
+                                </div>
+                            </div>
+
+                            <div class="education__content">
+                                <div class="education__time">
+                                    <span class="education__rounder"></span>
+                                    <!-- <span class="education__line"></span> -->
+                                </div>
+
+                                <div class="education__data bd-grid">
+                                    <h3 class="eeducation__title">{{resume.school_name}}</h3>
+                                    <span class="education__year">{{resume.school_year}}</span>
+                                    <span class="education__studies">{{resume.school_percentage}}% aggregate</span>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+
+                    <!--========== SKILLS  ==========-->
+                    {% if resume.skill_one %}
+                    <section class="skills section" id="skills">
+                        <h2 class="section-title">Skills</h2>
+
+                        <div class="skills__content bd-grid">
+                            <ul class="skills__data">
+                                {% if resume.skill_one%}
+                                <li class="skills__name">
+                                    <span class="skills__circle"></span> {{resume.skill_one}}
+                                </li>
+                                {%endif%}
+                                {% if resume.skill_two%}
+                                <li class="skills__name">
+                                    <span class="skills__circle"></span> {{resume.skill_two}}
+                                </li>
+                                {%endif%}
+                                {% if resume.skill_three%}
+                                <li class="skills__name">
+                                    <span class="skills__circle"></span> {{resume.skill_three}}
+                                </li>
+                                {%endif%}
+
+                                <!-- <li class="skills__name">
+                                    <span class="skills__circle"></span> Javascript
+                                </li> -->
+                            </ul>
+
+                            <ul class="skills__data">
+
+                                {% if resume.skill_four%}
+                                <li class="skills__name">
+                                    <span class="skills__circle"></span> {{resume.skill_four}}
+                                </li>
+                                {%endif%}
+                                {% if resume.skill_five%}
+                                <li class="skills__name">
+                                    <span class="skills__circle"></span> {{resume.skill_five}}
+                                </li>
+                                {%endif%}
+                                {% if resume.skill_six%}
+                                <li class="skills__name">
+                                    <span class="skills__circle"></span> {{resume.skill_six}}
+                                </li>
+                                {%endif%}
+                                
+                            </ul>
+                        </div>
+        
+                    </section>
+                    {%endif%}
+                </div>
+
+                <div class="resume__right">
+                    <!--========== EXPERIENCE ==========-->
+                    {% if resume.experienceone_role %}
+                    <section class="experience section" id="experience">
+                        <h2 class="section-title">Experience</h2>
+
+                        <div class="experience__container bd-grid">
+                            {%if resume.experienceone_role %}
+                            <div class="experience__content">
+                                <div class="experience__time">
+                                    <span class="experience__rounder"></span>
+                                    <span class="experience__line"></span>
+                                </div>
+
+                                <div class="experience__data bd-grid">
+                                    <h3 class="experience__title">{{resume.experienceone_role}}</h3>
+                                    <span class="experience__company">{{resume.experienceone_duration}} | {{resume.experienceone_company}}</span>
+                                    <p class="experience__description">{{resume.experienceone_description}}</p>
+
+                                </div>
+                            </div>
+                            {%endif%}
+                            {%if resume.experiencetwo_role %}
+                            <div class="experience__content">
+                                <div class="experience__time">
+                                    <span class="experience__rounder"></span>
+                                    <!-- <span class="experience__line"></span> -->
+                                </div>
+
+                                <div class="experience__data bd-grid">
+                                    <h3 class="experience__title">{{resume.experiencetwo_role}}</h3>
+                                    <span class="experience__company">{{resume.experiencetwo_duration}} | {{resume.experiencetwo_company}}</span>
+                                    <p class="experience__description">{{resume.experiencetwo_description}}</p>
+                                    
+                                </div>
+                            </div>
+                            {%endif%}
+                            
+
+                        </div>
+                    </section>
+                    {%endif%}
+                    <!--========== PROJECTS ==========-->
+                    <section class="certificate section" id="projects">
+                        <h2 class="section-title">Projects</h2>
+
+                        <div class="certificate__container bd-grid">
+                            {%if resume.projectone_title %}
+                            <div class="certificate__content">
+                                <h3 class="certificate__title">{{resume.projectone_title}}</h3>
+                                <p class="certificate__description">{{resume.projectone_description}}
+                                    {%if resume.projectone_demolink %}
+                                    <a href='{{resume.projectone_demolink}}' target="_blank">View Project</a></p>
+                                    {%endif%}</p>
+                            </div>
+                            {%endif%}
+                            {%if resume.projecttwo_title%}
+                            <div class="certificate__content">
+                                <h3 class="certificate__title">{{resume.projecttwo_title}}</h3>
+                                <p class="certificate__description">{{resume.projecttwo_description}}
+                                    {%if resume.projecttwo_demolink %}
+                                    <a href='{{resume.projecttwo_demolink}}' target="_blank">View Project</a></p>
+                                    {%endif%}</p>
+                            </div>
+                            {%endif%}
+                            {% if resume.projectthree_title %}
+                            <div class="certificate__content">
+                                <h3 class="certificate__title">{{resume.projectthree_title}}</h3>
+                                <p class="certificate__description">{{resume.projectthree_description}}
+                                    {%if resume.projectthree_demolink %}
+                                    <a href='{{resume.projectthree_demolink}}' target="_blank">View Project</a>
+                                    {%endif%}</p>
+                            </div>
+                            {%endif%}
+                        </div>
+                    </section>
+
+                    <!--========== CERTIFICATES ==========-->
+                    <section class="certificate section" id="certificates">
+                        <h2 class="section-title">Certificates</h2>
+
+                        <div class="certificate__container bd-grid">
+                            {%if resume.certificateone_title%}
+                            <div class="certificate__content">
+                                <h3 class="certificate__title">{{resume.certificateone_title}} ({{resume.certificateone_year}})</h3>
+                                                          
+                            </div>
+                            {%endif%}
+                            {%if resume.certificatetwo_title%}
+                            <div class="certificate__content">
+                                <h3 class="certificate__title">{{resume.certificatetwo_title}} ({{resume.certificatetwo_year}})</h3>
+                                                          
+                            </div>
+                            {%endif%}
+                            {%if resume.certificatethree_title%}
+                            <div class="certificate__content">
+                                <h3 class="certificate__title">{{resume.certificatethree_title}} ({{resume.certificatethree_year}})</h3>
+                                                          
+                            </div>
+                            {%endif%}
+                            
+
+                            
+                        </div>
+                    </section>
+
+                    <!--========== ACHIEVEMENTS ==========-->
+                    <section class="certificate section" id="certificates">
+                        <h2 class="section-title">Achievements</h2>
+
+                        <div class="certificate__container bd-grid">
+                            {% if resume.achievementone%}
+                            <div class="certificate__content">
+                                <li class="skills__name">
+                                    <span class="skills__circle"></span> <h3 class="certificate__title">{{resume.achievementone}}</h3>
+                                </li>                      
+                            </div>
+                            {%endif%}
+                            {% if resume.achievementtwo%}
+                            <div class="certificate__content">
+                                <li class="skills__name">
+                                    <span class="skills__circle"></span> <h3 class="certificate__title">{{resume.achievementtwo}}</h3>
+                                </li>                      
+                            </div>
+                            {%endif%}
+                            {% if resume.achievementthree%}
+                            <div class="certificate__content">
+                                <li class="skills__name">
+                                    <span class="skills__circle"></span> <h3 class="certificate__title">{{resume.achievementthree}}</h3>
+                                </li>                      
+                            </div>
+                            {%endif%}
+                            
+
+                            
+                        </div>
+                    </section>
+
+                    <!--========== LANGUAGES ==========-->
+                    <section class="languages section">
+                        <h2 class="section-title">Languages</h2>
+
+                        <div class="languages__container">
+                            <ul class="languages__content bd-grid">
+                                {% if resume.language_one%}
+                                <li class="languages__name">
+                                    <span class="languages__circle"></span> {{resume.language_one}}
+                                </li>
+                                {%endif%}
+                                {% if resume.language_two%}
+                                <li class="languages__name">
+                                    <span class="languages__circle"></span> {{resume.language_two}}
+                                </li>
+                                {%endif%}
+                                {% if resume.language_three%}
+                                <li class="languages__name">
+                                    <span class="languages__circle"></span>{{resume.language_three}}
+                                </li>
+                                {%endif%}
+                                
+                                
+                            </ul>
+                        </div>
+                    </section>
+                    
+                    <!-- ========== INTERESTS ==========
+                    <section class="interests section">
+                        <h2 class="section-title">Interests</h2>
+
+                        <div class="interests__container bd-grid">
+                            <div class="interests__content">
+                                <i class='bx bx-headphone interests__icon'></i>
+                                <span class="interests__name">Music</span>
+                            </div>
+
+                            <div class="interests__content">
+                                <i class='bx bxs-plane-alt interests__icon'></i>
+                                <span class="interests__name">Travel</span>
+                            </div>
+
+                            <div class="interests__content">
+                                <i class='bx bx-book interests__icon'></i>
+                                <span class="interests__name">Read</span>
+                            </div>
+
+                            <div class="interests__content">
+                                <i class='bx bx-dumbbell interests__icon'></i>
+                                <span class="interests__name">Fitness</span>
+                            </div>
+                        </div>
+                    </section> -->
+                </div>
+            </div>        
+        </main>
+
+        <!--========== SCROLL TOP ==========-->
+        <a href="" class="scrolltop" id="scroll-top">
+            <i class='bx bx-up-arrow-alt scrolltop__icon'></i>
+        </a>
+
+        <!--========== HTML2PDF ==========-->
+        <script src="{% static 'js/html2pdf.bundle.min.js'%}"></script>
+
+        <!--========== MAIN JS ==========-->
+        <script src="{% static 'js/resume.js'%}"></script>
+    </body>
+</html>

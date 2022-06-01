@@ -1,0 +1,58 @@
+{% extends 'main.html'%}
+
+
+{%block content %}
+
+
+
+<main class="formPage my-xl" style="width: 80%;">
+    <div class="content-box" >
+    <div class="settings">
+        <h3 class="settings__title">Notes Uploaded by Me</h3>
+        {%if request.user.profile.role == 'faculty'%}
+        
+        <a class="tag tag--pill tag--sub settings__btn tag--lg" href="{% url 'upload-notes' %}"><i class="im im-plus"></i> Add Notes</a>
+        {%endif%}
+      </div>
+      <div class="settings" style="margin-top: 8px;">
+        <h3 class="settings__title"><a class="backButton" href="{% url 'notes' %}"><i class="im im-angle-left"></i></a></h3>
+        
+      </div>
+
+      <table style="margin-top: 1rem; " class="table11">
+        <thead>
+            <tr>
+             <th>Branch</th>
+             <th>Semester</th>
+             <th>Subject</th>
+             <th>Topic</th>
+             <!-- <th>Uploaded By</th> -->
+             <th>Uploaded On</th>
+             <th>Action</th>
+             <th>Edit</th>
+             <th>Delete</th>
+             <!-- <th>Description</th> -->
+            </tr>
+        </thead>
+        <tbody>
+            {% for note in notes %}
+              <tr style="border-bottom: 1px solid #696d97;">
+                    <td data-label="Branch">{{note.branch}}</td>
+                    <td data-label="Semister">{{note.semister}}</td>
+                    <td data-label="Subject">{{note.subject}}</td>
+                    <td data-label="Topic">{{note.topic}}</td>
+                    <!-- <td data-label="Uploaded BY">{{note.owner}}</td> -->
+                    <td data-label="Uploaded On">{{note.uploaded_on}}</td>
+                    <td data-label="Action"><a href="{{note.notesfile.url}}" download> <button  class="tag tag--pill tag--main" style="border: #5aa5b9 2px solid ; background-color: #E6FAFF;"> <i class="im im-download"></i>Download</button></a></td>
+                    <td data-label="Edit"><a href="{% url 'edit-notes' note.id %}"><button class="tag tag--pill tag--main" style="border: #5aa5b9 2px solid; background-color: #E6FAFF; "> <i class="im im-edit"></i> Edit</button></a></td>
+                    <td data-label="Delete"><a href="{% url 'delete-notes' note.id %}"><button class="tag tag--pill tag--main" style="border: #5aa5b9 2px solid; background-color: #E6FAFF; color: red;"> <i class="im im-x-mark-circle-o"></i>Delete</button></a></td>
+                    <!-- <td data-label="Description">{{note.description|slice:45}}</td> -->
+              </tr>
+              {%endfor%}
+        </tbody>
+      </table>
+        </div>
+</main>
+{%endblock%}
+
+

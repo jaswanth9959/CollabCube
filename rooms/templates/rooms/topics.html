@@ -1,0 +1,31 @@
+
+
+      <div class="topics1" style="box-shadow: 1px 1px 6px 3px rgba(0, 0, 0, 0.1);  border-radius:5px;background-color:white">
+      <div class="topics-page1 layout__body1">
+        <div class="topics__header1">
+          <h6>Browse Topics</h6>
+      </div>
+        
+        
+
+        <ul class="topics__list1">
+          <li>
+            <a href="{% url 'rooms'%}" class="active1">All <span style="color: white;">{{topics.count}}</span></a>
+          </li>
+          {% for topic in topics %}
+          <li>
+            <a href="{% url 'rooms' %}?q={{topic.name}}">{{ topic.name }} <span style="color: white;">{{topic.room_set.all.count}}</span></a>
+          </li>
+          {% endfor %}
+
+        </ul>
+        <a class="tag tag--pill tag--sub settings__btn tag--lg" style="margin-left: 2rem;" href="{% url 'topics' %}">
+          More
+          <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 32 32">
+              <title>chevron-down</title>
+              <path d="M16 21l-13-13h-3l16 16 16-16h-3l-13 13z"></path>
+          </svg>
+      </a>
+      </div>
+    
+    </div>

@@ -1,0 +1,19 @@
+{%extends 'main.html'%}
+
+
+{%block content%}
+<main class="formPage my-xl">
+    <div class="content-box">
+        <div class="formWrapper">
+            <h3>Are you sure to delete "{{object}}"? </h3>
+            <form action="" method="POST">
+                {%csrf_token%}
+                <span class="tag tag--pill tag--main"><a href="{{request.META.HTTP_REFERER}}">Go Back</a></span>
+                <span class="tag tag--pill tag--main"><input style="border: none; background-color: #E6FAFF; color: red;" type="submit" value="Delete"></span>
+            </form>
+        </div>
+    </div>
+</main>
+
+
+{%endblock%}
